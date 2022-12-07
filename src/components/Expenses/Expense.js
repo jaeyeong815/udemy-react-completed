@@ -1,10 +1,12 @@
 import Card from '../UI/Card';
 import ExpenseItem from './ExpenseItem';
+import ExpensesFilter from './ExpensesFilter';
 import './Expense.css';
 
-const Expense = ({ expenses }) => {
+const Expense = ({ expenses, onFilterExpense }) => {
   return (
     <Card className="expenses">
+      <ExpensesFilter expenses={expenses} onFilterExpense={onFilterExpense} />
       <ExpenseItem
         title={expenses[0].title}
         amount={expenses[0].amount}
