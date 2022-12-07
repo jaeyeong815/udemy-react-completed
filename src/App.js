@@ -29,14 +29,10 @@ const App = () => {
     console.log('expense', expense);
   };
 
-  const filterExpensesHandler = (expenses) => {
-    console.log('expenses', expenses);
-  };
-
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
-      <Expense expenses={expenses} onFilterExpense={filterExpensesHandler} />
+      <Expense expenses={expenses} />
     </div>
   );
 };
