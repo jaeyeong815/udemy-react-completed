@@ -15,20 +15,27 @@ const Expense = ({ expenses }) => {
     (expense) => expense.date.getFullYear().toString() === filteredYear
   );
 
-  return (
-    <Card className="expenses">
-      <ExpensesFilter
-        selected={filteredYear}
-        onFilterExpense={filterChangeHandler}
-      />
-      {filterExpenses.map((expense) => (
+  const expenseContent =
+    filterExpenses.length > 0 ? (
+      filterExpenses.map((expense) => (
         <ExpenseItem
           key={expense.id}
           title={expense.title}
           amount={expense.amount}
           date={expense.date}
         />
-      ))}
+      ))
+    ) : (
+      <p>지출 내역이 없습니다.</p>
+    );
+
+  return (
+    <Card className="expenses">
+      <ExpensesFilter
+        selected={filteredYear}
+        onFilterExpense={filterChangeHandler}
+      />
+      {expenseContent}
     </Card>
   );
 };
