@@ -1,8 +1,8 @@
 import Card from '../UI/Card';
-import ExpenseItem from './ExpenseItem';
 import ExpensesFilter from './ExpensesFilter';
 import './Expense.css';
 import { useState } from 'react';
+import ExpensesList from './ExpensesList';
 
 const Expense = ({ expenses }) => {
   const [filteredYear, setFilteredYear] = useState('2020');
@@ -15,27 +15,13 @@ const Expense = ({ expenses }) => {
     (expense) => expense.date.getFullYear().toString() === filteredYear
   );
 
-  const expenseContent =
-    filterExpenses.length > 0 ? (
-      filterExpenses.map((expense) => (
-        <ExpenseItem
-          key={expense.id}
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-        />
-      ))
-    ) : (
-      <p>지출 내역이 없습니다.</p>
-    );
-
   return (
     <Card className="expenses">
       <ExpensesFilter
         selected={filteredYear}
         onFilterExpense={filterChangeHandler}
       />
-      {expenseContent}
+      <ExpensesList expenses={filterExpenses} />
     </Card>
   );
 };
