@@ -8,7 +8,6 @@ const NewExpense = ({ onAddExpense }) => {
       id: Math.random().toString(),
     };
     onAddExpense(expenseData);
-    console.log('expenseData', expenseData);
   };
   return (
     <div className="new-expense">

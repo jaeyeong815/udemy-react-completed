@@ -28,13 +28,12 @@ const ExpenseForm = ({ onSaveExpenseData }) => {
     const expenseData = {
       title: enteredTitle,
       amount: enteredAmount,
-      date: new Date(),
+      date: new Date(enteredDate),
     };
+    onSaveExpenseData(expenseData);
     setEnteredTitle('');
     setEnteredAmount('');
     setEnteredDate('');
-
-    onSaveExpenseData(expenseData);
   };
   return (
     <form onSubmit={submitHandler}>
