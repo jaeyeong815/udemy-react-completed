@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
 
-const AddUser = () => {
+const AddUser = ({ onAddUser }) => {
   const [username, setUsername] = useState('');
   const [age, setAge] = useState('');
 
@@ -27,6 +27,7 @@ const AddUser = () => {
       return;
     }
 
+    onAddUser(username, age);
     setUsername('');
     setAge('');
   };

@@ -1,16 +1,18 @@
 import React from 'react';
+import { useState } from 'react';
 import AddUser from './components/Users/AddUser';
 import UserList from './components/Users/UserList';
 
 function App() {
-  // 임시 데이터
-  const userList = [
-    { name: 'Max', age: '31' },
-    { name: 'Jae', age: '32' },
-  ];
+  const [userList, setUserList] = useState([]);
+
+  const addUserHandler = (username, age) => {
+    setUserList((prevUserList) => [{ name: username, age }, ...prevUserList]);
+  };
+
   return (
     <div>
-      <AddUser />
+      <AddUser onAddUser={addUserHandler} />
       <UserList userList={userList} />
     </div>
   );
