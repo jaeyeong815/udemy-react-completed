@@ -1,12 +1,5 @@
 import { useState } from 'react';
-import styled from 'styled-components';
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+import Card from '../UI/Card';
 
 const AddUser = () => {
   const [username, setUsername] = useState('');
@@ -28,13 +21,15 @@ const AddUser = () => {
   };
 
   return (
-    <Form onSubmit={submitHandler}>
-      <label htmlFor="username">User Name</label>
-      <input type="text" id="username" onChange={usernameInputHandler} />
-      <label htmlFor="age">Age(Years)</label>
-      <input type="text" id="age" onChange={ageInputHandler} />
-      <button type="submit">Add User</button>
-    </Form>
+    <Card>
+      <form onSubmit={submitHandler}>
+        <label htmlFor="username">User Name</label>
+        <input type="text" id="username" onChange={usernameInputHandler} />
+        <label htmlFor="age">Age(Years)</label>
+        <input type="text" id="age" onChange={ageInputHandler} />
+        <button type="submit">Add User</button>
+      </form>
+    </Card>
   );
 };
 
