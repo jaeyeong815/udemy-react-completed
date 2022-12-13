@@ -7,6 +7,7 @@ const StButton = styled.button`
   color: white;
   padding: 0.25rem 1rem;
   cursor: pointer;
+  border-radius: 5px;
 
   :hover {
     background: #741188;
@@ -18,8 +19,12 @@ const StButton = styled.button`
   }
 `;
 
-const Button = ({ content, type }) => {
-  return <StButton type={type || 'button'}>{content}</StButton>;
+const Button = ({ content, type, onClick }) => {
+  return (
+    <StButton type={type || 'button'} onClick={onClick}>
+      {content}
+    </StButton>
+  );
 };
 
 export default Button;
