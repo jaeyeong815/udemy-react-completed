@@ -1,11 +1,44 @@
 import { useState } from 'react';
+import styled from 'styled-components';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
+import ErrorModal from '../UI/ErrorModal';
+
+const Form = styled.form`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  & button {
+    width: fit-content;
+  }
+`;
+
+const Label = styled.label`
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+`;
+
+const Input = styled.input`
+  display: block;
+  font: inherit;
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 0.15rem;
+  margin-bottom: 0.5rem;
+
+  :focus {
+    outline: none;
+    border-color: #4f005f;
+  }
+`;
 
 const AddUser = ({ onAddUser }) => {
   const [username, setUsername] = useState('');
   const [age, setAge] = useState('');
-
+  const [isError, setIsError] = useState(false);
+  const [errMessage, setErrMessage] = useState('');
   const usernameInputHandler = (e) => {
     setUsername(e.target.value);
   };
@@ -18,12 +51,14 @@ const AddUser = ({ onAddUser }) => {
     e.preventDefault();
 
     if (username.trim().length === 0 || age.trim().length === 0) {
-      console.log('입력값이 비어있습니다');
+      setIsError(true);
+      setErrMessage('입력란을 모두 작성해주세요');
       return;
     }
 
     if (Number(age) < 1) {
-      console.log('나이를 다시 확인해주세요');
+      setIsError(true);
+      setErrMessage('나이를 다시 확인해주세요');
       return;
     }
 
@@ -32,20 +67,26 @@ const AddUser = ({ onAddUser }) => {
     setAge('');
   };
 
+  const onOkayHandel = () => {
+    setErrMessage('');
+    setIsError(false);
+  };
+
   return (
     <Card>
-      <form onSubmit={submitHandler}>
-        <label htmlFor="username">User Name</label>
-        <input
+      <Form onSubmit={submitHandler}>
+        <Label htmlFor="username">User Name</Label>
+        <Input
           type="text"
           id="username"
           value={username}
           onChange={usernameInputHandler}
         />
-        <label htmlFor="age">Age(Years)</label>
-        <input type="text" id="age" value={age} onChange={ageInputHandler} />
+        <Label htmlFor="age">Age(Years)</Label>
+        <Input type="text" id="age" value={age} onChange={ageInputHandler} />
         <Button content="Add User" type="submit" />
-      </form>
+      </Form>
+      {isError && <ErrorModal onOkay={onOkayHandel} content={errMessage} />}
     </Card>
   );
 };
