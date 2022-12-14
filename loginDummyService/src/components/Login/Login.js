@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
@@ -11,24 +11,27 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
-  useEffect(() => {
-    const ientifier = setTimeout(() => {
-      console.log('EFFECT ing..');
-      setFormIsValid(enteredEmail.includes('@') && enteredPassword.trim().length > 6);
-    }, 500);
+  // useEffect 사용 대신 useReducer 사용해보기 위해 주석처리
+  // useEffect(() => {
+  //   const ientifier = setTimeout(() => {
+  //     console.log('EFFECT ing..');
+  //     setFormIsValid(enteredEmail.includes('@') && enteredPassword.trim().length > 6);
+  //   }, 500);
 
-    return () => {
-      console.log('CLEAN UP!!');
-      clearTimeout(ientifier);
-    };
-  }, [enteredEmail, enteredPassword]);
+  //   return () => {
+  //     console.log('CLEAN UP!!');
+  //     clearTimeout(ientifier);
+  //   };
+  // }, [enteredEmail, enteredPassword]);
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
+    setFormIsValid(event.target.value.includes('@') && enteredPassword.trim().length > 6);
   };
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
+    setFormIsValid(enteredEmail.includes('@') && event.target.value.trim().length > 6);
   };
 
   const validateEmailHandler = () => {
