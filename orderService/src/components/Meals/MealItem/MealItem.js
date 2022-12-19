@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import MealItemForm from './MealItemForm';
 
-const MealItem = ({ name, description, price }) => {
+const MealItem = ({ id, name, description, price }) => {
   const priceFormat = `$${price}`;
   return (
     <Container>
@@ -8,6 +9,9 @@ const MealItem = ({ name, description, price }) => {
         <Title>{name}</Title>
         <Description>{description}</Description>
         <Price>{priceFormat}</Price>
+      </div>
+      <div>
+        <MealItemForm id={id} />
       </div>
     </Container>
   );
