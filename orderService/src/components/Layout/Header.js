@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import HeaderCartBtn from './HeaderCartBtn';
 import mealsImg from '../../assets/meals.jpg';
 
 const Header = () => {
@@ -6,7 +7,7 @@ const Header = () => {
     <>
       <StHeader>
         <h1>ReactMeals</h1>
-        <button>Cart</button>
+        <HeaderCartBtn />
       </StHeader>
       <ImgContainer>
         <StImg src={mealsImg} />
