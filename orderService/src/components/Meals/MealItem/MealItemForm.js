@@ -1,10 +1,27 @@
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import Input from '../../UI/Input';
 
-const MealItemForm = ({ id }) => {
+const MealItemForm = ({ id, onAddToCart }) => {
+  const [amountIsValid, setAmountIsValid] = useState(true);
+  const amountRef = useRef();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const enteredAmount = Number(amountRef.current.value);
+
+    if (enteredAmount < 1 || enteredAmount > 5) {
+      setAmountIsValid(false);
+      return;
+    }
+    onAddToCart(enteredAmount);
+  };
+
   return (
-    <StForm>
+    <StForm onSubmit={onSubmit}>
       <Input
+        ref={amountRef}
         label='Amount'
         input={{
           type: 'number',
@@ -16,6 +33,7 @@ const MealItemForm = ({ id }) => {
         }}
       />
       <StButton>Add</StButton>
+      {!amountIsValid && <p>amount는 1이상 5이하 개수여야합니다</p>}
     </StForm>
   );
 };
@@ -35,8 +53,8 @@ const StButton = styled.button`
   padding: 0.25rem 2rem;
   border-radius: 20px;
   font-weight: bold;
-  :hover,
-  :active {
+  &:hover,
+  &:active {
     background-color: #641e03;
     border-color: #641e03;
   }

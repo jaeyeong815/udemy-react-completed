@@ -1,8 +1,22 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
+import CartContext from '../../../store/CartContext';
 import MealItemForm from './MealItemForm';
 
 const MealItem = ({ id, name, description, price }) => {
+  const cartContext = useContext(CartContext);
   const priceFormat = `$${price}`;
+
+  const addToCartItem = (amount) => {
+    const item = {
+      id,
+      name,
+      amount,
+      price,
+    };
+    cartContext.addItem(item);
+  };
+
   return (
     <Container>
       <div>
@@ -11,7 +25,7 @@ const MealItem = ({ id, name, description, price }) => {
         <Price>{priceFormat}</Price>
       </div>
       <div>
-        <MealItemForm id={id} />
+        <MealItemForm id={id} onAddToCart={addToCartItem} />
       </div>
     </Container>
   );

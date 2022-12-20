@@ -1,13 +1,14 @@
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
-const Input = ({ label, input }) => {
+const Input = forwardRef(({ label, input }, ref) => {
   return (
     <Container>
       <StLabel htmlFor={input.id}>{label}</StLabel>
-      <StInput {...input} />
+      <StInput ref={ref} {...input} />
     </Container>
   );
-};
+});
 
 export default Input;
 
