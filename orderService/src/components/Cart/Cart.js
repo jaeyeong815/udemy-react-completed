@@ -1,26 +1,47 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
+import CartItem from './CartItem';
 import Modal from '../UI/Modal';
+import CartContext from '../../store/CartContext';
 
 const Cart = ({ onCart }) => {
+  const cartContext = useContext(CartContext);
+
+  const hasItems = cartContext.items.length > 0;
+  const totalAmount = `$${cartContext.totalAmount.toFixed(2)}`;
+
+  const onRemoveToCartItem = (id) => {};
+  const onAddToCartItem = (item) => {};
+
   const cartItems = (
     <CartList>
-      {[{ id: 'c1', name: 'kimbab', amount: 2, price: 12.99 }].map((item) => (
-        <li>{item.name}</li>
+      {cartContext.items.map((item) => (
+        <CartItem
+          key={item.id}
+          name={item.name}
+          price={item.price}
+          amount={item.price}
+          onRemove={onRemoveToCartItem.bind(null, item.id)}
+          onAdd={onAddToCartItem.bind(null, item)}
+        >
+          {item.name}
+        </CartItem>
       ))}
     </CartList>
   );
+
   return (
     <Modal onClick={onCart}>
       {cartItems}
       <TotalPrice>
         <span>Total price</span>
-        <span>111.11</span>
+        <span>{totalAmount}</span>
       </TotalPrice>
       <Actions>
         <StButton className='button--alt' onClick={onCart}>
           닫기
         </StButton>
-        <StButton className='order'>주문</StButton>
+        {hasItems && <StButton className='order'>주문</StButton>}
       </Actions>
     </Modal>
   );
