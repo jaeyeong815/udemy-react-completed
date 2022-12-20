@@ -1,11 +1,11 @@
-import CartContext from './cartContext';
+import CartContext from './CartContext';
 
 const CartProvider = ({ children }) => {
   const addCartItem = () => {};
   const removeCartItem = () => {};
 
   const cartContext = {
-    item: [],
+    items: [],
     totalAmount: 0,
     addItem: addCartItem,
     removeItem: removeCartItem,
