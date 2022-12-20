@@ -20,7 +20,7 @@ const Cart = ({ onCart }) => {
           key={item.id}
           name={item.name}
           price={item.price}
-          amount={item.price}
+          amount={item.amount}
           onRemove={onRemoveToCartItem.bind(null, item.id)}
           onAdd={onAddToCartItem.bind(null, item)}
         >
