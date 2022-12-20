@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import Modal from '../UI/Modal';
 
-const Cart = () => {
+const Cart = ({ onCart }) => {
   const cartItems = (
     <CartList>
       {[{ id: 'c1', name: 'kimbab', amount: 2, price: 12.99 }].map((item) => (
@@ -9,17 +10,19 @@ const Cart = () => {
     </CartList>
   );
   return (
-    <>
+    <Modal onClick={onCart}>
       {cartItems}
       <TotalPrice>
         <span>Total price</span>
         <span>111.11</span>
       </TotalPrice>
       <Actions>
-        <StButton className='button--alt'>닫기</StButton>
+        <StButton className='button--alt' onClick={onCart}>
+          닫기
+        </StButton>
         <StButton className='order'>주문</StButton>
       </Actions>
-    </>
+    </Modal>
   );
 };
 

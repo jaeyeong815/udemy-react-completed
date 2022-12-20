@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import CartIcon from './CartIcon';
 
-const HeaderCartBtn = () => {
+const HeaderCartBtn = ({ onClick }) => {
   return (
-    <StButton>
+    <StButton onClick={onClick}>
       <Icon>
         <CartIcon />
       </Icon>
