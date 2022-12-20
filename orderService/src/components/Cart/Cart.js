@@ -10,7 +10,9 @@ const Cart = ({ onCart }) => {
   const hasItems = cartContext.items.length > 0;
   const totalAmount = `$${cartContext.totalAmount.toFixed(2)}`;
 
-  const onRemoveToCartItem = (id) => {};
+  const onRemoveToCartItem = (id) => {
+    cartContext.removeItem(id);
+  };
   const onAddToCartItem = (item) => {
     cartContext.addItem({
       ...item,
