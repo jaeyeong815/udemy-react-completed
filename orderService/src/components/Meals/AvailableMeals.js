@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Card from '../UI/Card';
 import MealItem from './MealItem/MealItem';
 
@@ -50,11 +50,23 @@ const AvailableMeals = () => {
 
 export default AvailableMeals;
 
+const MealsAppear = keyframes`
+from {
+      opacity: 0;
+      transform: translateY(3rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+`;
+
 const StSection = styled.section`
   max-width: 60rem;
   width: 90%;
   margin: 2rem auto;
-  animation: meals-appear 1s ease-out forwards;
+  animation: ${MealsAppear} 1s ease-out forwards;
 `;
 
 const StUl = styled.ul`

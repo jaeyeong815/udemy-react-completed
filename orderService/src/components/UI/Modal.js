@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const BackDrop = ({ onClick }) => {
   return <StBackdrop onClick={onClick} />;
@@ -7,7 +7,7 @@ const BackDrop = ({ onClick }) => {
 const ModalOverlay = ({ children }) => {
   return (
     <StModal>
-      <StContent>{children}</StContent>
+      <div>{children}</div>
     </StModal>
   );
 };
@@ -33,6 +33,17 @@ const StBackdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.75);
 `;
 
+const SlideDown = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const StModal = styled.div`
   position: fixed;
   top: 20vh;
@@ -43,7 +54,10 @@ const StModal = styled.div`
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 30;
-  animation: slide-down 300ms ease-out forwards;
-`;
+  animation: ${SlideDown} 300ms ease-out forwards;
 
-const StContent = styled.div``;
+  @media (min-width: 768px) {
+    width: 40rem;
+    left: calc(50% - 20rem);
+  }
+`;
