@@ -9,17 +9,17 @@ const Cart = () => {
     </CartList>
   );
   return (
-    <div>
+    <>
       {cartItems}
       <TotalPrice>
         <span>Total price</span>
         <span>111.11</span>
       </TotalPrice>
       <Actions>
-        <StButton>닫기</StButton>
-        <StButton>주문</StButton>
+        <StButton className='button--alt'>닫기</StButton>
+        <StButton className='order'>주문</StButton>
       </Actions>
-    </div>
+    </>
   );
 };
 
@@ -44,8 +44,6 @@ const TotalPrice = styled.div`
 
 const Actions = styled.div`
   text-align: right;
-  background-color: #8a2b06;
-  color: white;
 `;
 
 const StButton = styled.button`
@@ -56,14 +54,20 @@ const StButton = styled.button`
   padding: 0.5rem 2rem;
   border-radius: 25px;
   margin-left: 1rem;
-  :hover,
-  :active {
-    background-color: #5a1a01;
-    border-color: #5a1a01;
+
+  &.button--alt {
+    color: #8a2b06;
+  }
+
+  &.order {
+    background-color: #8a2b06;
     color: white;
   }
 
-  & .button--alt {
-    color: #8a2b06;
+  &:hover,
+  &:active {
+    background-color: #5a1a01;
+    border-color: #5a1a01;
+    color: white;
   }
 `;
