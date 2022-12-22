@@ -1,13 +1,13 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit';
 
-const initState = {
+const initCounterState = {
   counter: 0,
   counterToggle: false,
 };
 
 const counterSlice = createSlice({
   name: 'counter',
-  initialState: initState,
+  initialState: initCounterState,
   reducers: {
     increment: (state, action) => {
       if (action.payload) {
