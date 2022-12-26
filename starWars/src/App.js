@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import MoviesList from './components/MoviesList';
+import AddMovie from './components/AddMovie';
 import './App.css';
 
 function App() {
@@ -12,20 +13,25 @@ function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const result = await fetch('https://swapi.dev/api/films');
+      const result = await fetch(
+        'https://react-http-cc64a-default-rtdb.firebaseio.com/movies.json'
+      );
       if (!result.ok) {
         throw new Error('Something went wrong!');
       }
       const data = await result.json();
-      const transformedMovies = data.results.map((movie) => {
-        return {
-          id: movie.episode_id,
-          title: movie.title,
-          openingText: movie.opening_crawl,
-          releaseDate: movie.release_date,
-        };
-      });
-      setMovies(transformedMovies);
+
+      const loadedMovies = [];
+      for (const key in data) {
+        loadedMovies.push({
+          id: key,
+          title: data[key].title,
+          openingText: data[key].openingText,
+          releaseDate: data[key].releaseDate,
+        });
+      }
+
+      setMovies(loadedMovies);
     } catch (err) {
       setError(err.message);
     }
@@ -35,6 +41,25 @@ function App() {
   useEffect(() => {
     fetchApiHandler();
   }, [fetchApiHandler]);
+
+  const addMovieHandler = async (movie) => {
+    try {
+      const result = await fetch(
+        'https://react-http-cc64a-default-rtdb.firebaseio.com/movies.json',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(movie),
+        }
+      );
+      const data = await result.json();
+      console.log('🚀 ~ file: App.js:55 ~ addMovieHandler ~ data', data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   let content;
 
@@ -53,6 +78,9 @@ function App() {
 
   return (
     <React.Fragment>
+      <section>
+        <AddMovie onAddMovie={addMovieHandler} />
+      </section>
       <section>
         <button onClick={fetchApiHandler}>Fetch Movies</button>
       </section>
