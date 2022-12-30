@@ -43,7 +43,7 @@ const SimpleInput = (props) => {
         {nameInputInvalid && <p className='error-text'>이름을 입력해주세요.</p>}
       </div>
       <div className='form-actions'>
-        <button>Submit</button>
+        <button disabled={!enteredNaimIsValid}>Submit</button>
       </div>
     </form>
   );
