@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import toggleReducer from './toggleSlice';
+import uiReducer from './uiSlice';
 import cartReducer from './cartSlice';
 
 const store = configureStore({
   reducer: {
-    toggle: toggleReducer,
+    ui: uiReducer,
     cart: cartReducer,
   },
 });
