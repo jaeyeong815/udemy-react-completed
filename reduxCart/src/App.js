@@ -4,8 +4,7 @@ import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
 import Notification from './components/UI/Notification';
-import { fetchCartData } from './store/cartActions';
-import { sendCartData } from './store/cartSlice';
+import { fetchCartData, sendCartData } from './store/cartActions';
 
 let isIntitial = true;
 
