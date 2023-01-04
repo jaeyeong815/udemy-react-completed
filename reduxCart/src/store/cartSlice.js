@@ -6,12 +6,14 @@ const cartSlice = createSlice({
   initialState: {
     items: [],
     totalQuantity: 0,
+    changed: false,
   },
   reducers: {
     addItemToCart: (state, action) => {
       const newItem = action.payload;
       const existingItem = state.items.find((item) => item.id === newItem.id);
       state.totalQuantity += 1;
+      state.changed = true;
       if (existingItem) {
         existingItem.quantity += 1;
         existingItem.totalPrice = existingItem.totalPrice + newItem.price;
@@ -29,6 +31,7 @@ const cartSlice = createSlice({
       const removeItemId = action.payload;
       const existingItem = state.items.find((item) => item.id === removeItemId);
       state.totalQuantity -= 1;
+      state.changed = true;
       if (existingItem.quantity === 1) {
         const filterd = state.items.filter((item) => item.id !== removeItemId);
         state.items = filterd;
@@ -36,6 +39,10 @@ const cartSlice = createSlice({
       }
       existingItem.quantity -= 1;
       existingItem.totalPrice = existingItem.totalPrice - existingItem.price;
+    },
+    replaceCart: (state, action) => {
+      state.totalQuantity = action.payload.totalQuantity;
+      state.items = action.payload.items;
     },
   },
 });
@@ -53,7 +60,10 @@ export const sendCartData = (cartData) => {
     const sendRequest = async () => {
       const response = await fetch('https://react-http-cc64a-default-rtdb.firebaseio.com/cart.json', {
         method: 'POST',
-        body: JSON.stringify(cartData),
+        body: JSON.stringify({
+          items: cartData.items,
+          totalQuantity: cartData.totalQuantity,
+        }),
       });
       if (!response.ok) {
         throw new Error('Sending cart data failed.');
