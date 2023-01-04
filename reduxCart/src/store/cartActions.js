@@ -19,8 +19,8 @@ export const fetchCartData = () => {
       const cart = await fetchData();
       dispatch(
         cartActions.replaceCart({
-          items: cart.items || [],
-          totalQuantity: cart.totalQuantity,
+          items: cart?.items || [],
+          totalQuantity: cart?.totalQuantity || 0,
         }),
       );
     } catch (err) {
@@ -47,7 +47,7 @@ export const sendCartData = (cartData) => {
 
     const sendRequest = async () => {
       const response = await fetch('https://react-http-cc64a-default-rtdb.firebaseio.com/cart.json', {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify({
           items: cartData.items,
           totalQuantity: cartData.totalQuantity,
