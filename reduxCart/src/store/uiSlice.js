@@ -7,7 +7,10 @@ const uiSlice = createSlice({
     notification: null,
   },
   reducers: {
-    toggleCart: (state) => (state = !state),
+    toggleCart: (state) => {
+      state.toggle = !state.toggle;
+    },
+
     showNotification: (state, action) => {
       state.notification = {
         status: action.payload.status,
