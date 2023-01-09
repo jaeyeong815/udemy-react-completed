@@ -1,4 +1,5 @@
 import { FC, useRef } from 'react';
+import classes from './NewTodo.module.css';
 
 const NewTodo: FC<{ onAddTodo: (text: string) => void }> = ({ onAddTodo }) => {
   const textInputRef = useRef<HTMLInputElement>(null);
@@ -17,7 +18,7 @@ const NewTodo: FC<{ onAddTodo: (text: string) => void }> = ({ onAddTodo }) => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} className={classes.form}>
       <label htmlFor='todoText'>할 일 작성하기</label>
       <input type='text' id='todoText' ref={textInputRef} />
       <button>할 일 추가하기</button>
