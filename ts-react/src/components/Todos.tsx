@@ -1,10 +1,9 @@
 import { FC } from 'react';
 import TodoItem from './TodoItem';
+import { Todo } from '../models/todo';
 import classes from './Todos.module.css';
 
-import { Props } from '../models/todo';
-
-const Todos: FC<Props> = ({ children, items }) => {
+const Todos: FC<{ items: Todo[] }> = ({ items }) => {
   return (
     <ul className={classes.todos}>
       {items?.map((item) => (
