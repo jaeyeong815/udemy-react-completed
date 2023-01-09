@@ -1,8 +1,14 @@
-const Todos = () => {
+import { FC } from 'react';
+import TodoItem from './TodoItem';
+
+import { Props } from '../models/todo';
+
+const Todos: FC<Props> = ({ children, items }) => {
   return (
     <ul>
-      <li>리액트 공부</li>
-      <li>타입스크립트 공부</li>
+      {items?.map((item) => (
+        <TodoItem key={item.id} text={item.text} />
+      ))}
     </ul>
   );
 };
